@@ -16,9 +16,9 @@ function App() {
           <Routes>
             <Route path="/customer" element={<CustomerDashboard />} />
             <Route path="/customer/scan" element={<ScanQr />} />
-            
+
             <Route path="/staff" element={<ApprovalList />} />
-            
+
             <Route path="*" element={<Navigate to="/customer" />} />
           </Routes>
         </main>
