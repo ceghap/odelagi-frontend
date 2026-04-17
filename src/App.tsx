@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { TenantProvider, LocalTenantMockSelector, useTenantContext } from './context/TenantContext';
+import GlobalWallet from './pages/Portal/GlobalWallet';
 import CustomerDashboard from './pages/Customer/CustomerDashboard';
 import ScanQr from './pages/Customer/ScanQr';
 import ApprovalList from './pages/Staff/ApprovalList';
@@ -20,10 +21,21 @@ function AppContent() {
 
       <main className="app-main">
         <Routes>
-          <Route path="/customer" element={<CustomerDashboard />} />
-          <Route path="/customer/scan" element={<ScanQr />} />
-          <Route path="/staff" element={<ApprovalList />} />
-          <Route path="*" element={<Navigate to="/customer" />} />
+          {tenantName ? (
+            <>
+              {/* Isolated Shop Routes */}
+              <Route path="/customer" element={<CustomerDashboard />} />
+              <Route path="/customer/scan" element={<ScanQr />} />
+              <Route path="/staff" element={<ApprovalList />} />
+              <Route path="*" element={<Navigate to="/customer" />} />
+            </>
+          ) : (
+            <>
+              {/* Master Hub / Global Portal Routes */}
+              <Route path="/wallet" element={<GlobalWallet />} />
+              <Route path="*" element={<Navigate to="/wallet" />} />
+            </>
+          )}
         </Routes>
       </main>
       
